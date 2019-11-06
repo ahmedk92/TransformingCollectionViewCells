@@ -112,6 +112,8 @@ class Cell: UICollectionViewCell, ScrollViewObserver {
         transform = transform.concatenating(CGAffineTransform(scaleX: scale, y: scale))
         
         view.transform = transform
+        
+        view.isHidden = scale < 0.5
     }
 }
 
