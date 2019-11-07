@@ -104,7 +104,7 @@ class Cell: UICollectionViewCell, ScrollViewObserver {
         
         let rotation: CGFloat = (convertedViewCenter.x - scrollView.center.x) * 1 / scrollView.bounds.width
         let scale = 1 - abs(rotation)
-        let translationPoint = CGPoint(x: view.convert(scrollView.center, from: scrollView.superview!).x - view.bounds.width / 2, y: view.convert(scrollView.center, from: scrollView.superview!).y + 150)
+        let translationPoint = CGPoint(x: view.convert(scrollView.center, from: scrollView.superview!).x - view.bounds.width / 2, y: view.convert(scrollView.center, from: scrollView.superview!).y + bounds.width * 2)
         
         transform = transform.concatenating(CGAffineTransform(translationX: -translationPoint.x, y: -translationPoint.y))
         transform = transform.concatenating(CGAffineTransform(rotationAngle: rotation))
