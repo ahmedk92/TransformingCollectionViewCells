@@ -113,7 +113,9 @@ class Cell: UICollectionViewCell, ScrollViewObserver {
         
         view.transform = transform
         
-        view.isHidden = scale < 0.5
+        let viewFrameInScrollViewSuperView = scrollView.superview!.convert(view.frame, from: view.superview!) // resolves ghost cells
+        
+        view.isHidden = scale < 0.5 || viewFrameInScrollViewSuperView.midY < scrollView.center.y
     }
 }
 
@@ -127,5 +129,11 @@ extension Array where Element == ScrollViewObserverBox {
     mutating func appendUnique(_ element: Element) {
         guard !contains(where: { $0.observer === element.observer }) else { return }
         append(element)
+    }
+}
+
+extension CGPoint {
+    func distance(to target: CGPoint) -> CGFloat {
+        return sqrt((x - target.x) * (x - target.x) + (y - target.y) * (y - target.y))
     }
 }
